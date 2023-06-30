@@ -1,2 +1,2 @@
 # smart_trading_web
-django-project
+django-project is in branch "master"
