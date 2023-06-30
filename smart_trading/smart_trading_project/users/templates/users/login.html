@@ -1,0 +1,23 @@
+{% extends 'main/layout.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="features">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <h2 class="border-bottom mb-4">Вход</h2>
+                    Логин</br>
+                    {{ form.username }}</br></br>
+                Пароль</br> {{ form.password }}</br></br>
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-danger" type="submit">Войти</button>
+            </div>
+        </form>
+        <div class="border-top pt-3">
+            <small class="text-muted">
+                Нет аккаунта? <a class="ml-2" href="{% url 'register' %}">Регистрация</a>
+            </small>
+        </div>
+    </div>
+{% endblock content %}

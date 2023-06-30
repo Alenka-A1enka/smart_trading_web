@@ -1,0 +1,42 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}Новости{% endblock %}
+
+{% block content %}
+<div class="features">
+    <h1>Мои новости</h1>
+
+    <a href="{% url 'news-home-prnewswire' %}"><button class="btn btn-outline-warning" type="submit" value="prnewswire.com">prnewswire.com</button></a>
+    <a href="{% url 'news-home-yahoo' %}"><button class="btn btn-outline-dark" type="submit" value="yahoo.com">yahoo.com</button></a>
+
+
+    {% if news %}
+
+
+    {% for el in news %}
+
+        <div class="alert alert-warning">
+        {% if el.source == 'prnewswire.com' %}
+            <a href="https://prnewswire.com">{{ el.source }}</a>
+            <i class="fa fa-link" aria-hidden="true"></i>
+        {% endif %}
+         {% if el.source == 'yahoo.com' %}
+        <a href="https://yahoo.com">{{ el.source }}</a>
+            <i class="fa fa-link" aria-hidden="true"></i>
+        {% endif %}
+         </br>
+         {{ el.date }}
+
+         </br></br>{{ el.header }}</br>
+            <div class="font-text-grey">
+            {{ el.annotation }}
+            </div>
+        </div>
+    {% endfor %}
+
+    {% else %}
+    <p>Новости еще не появились:(</p>
+    {% endif %}
+</div>
+{% endblock %}
+
