@@ -1,0 +1,48 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}Настройки{% endblock %}
+
+{% block content %}
+<div class="features">
+    <h1>{{ companies.company_ticker }} ({{ companies.company_name }})</h1>
+
+    <br/><br/>
+    <label class="name-for-change">Используемые алгоритмы: </label></br></br>
+    <div class="block-for-change1">
+        {% if 'Семантический анализ' in companies.neuro_methods_list %}
+<!--        <a href=""><i class="fa fa-times" aria-hidden="true"></i></a>-->
+        <p>Семантический анализ</p>
+        {% endif %}
+        {% if 'Нейросетевой анализ' in companies.neuro_methods_list %}
+<!--        <a href=""><i class="fa fa-times" aria-hidden="true"></i></a>-->
+        <p>Нейросетевой анализ</p>
+        {% endif %}
+<!--        <br/><a href=""><button class="btn btn-outline-info" type="button">Добавить</button></a>-->
+    </div>
+
+
+    <label class="name-for-change">Используемые временные промежутки: </label></br></br>
+    <div class="block-for-change1">
+        <p>{{ companies.time_laps_list }}</p>
+<!--        <br/><a href=""><button class="btn btn-outline-info" type="button" disabled>Добавить</button></a>-->
+    </div>
+
+
+
+    <label class="name-for-change">Новостные ресурсы: </label></br></br>
+    <div class="block-for-change1">
+        {% if 'prnewswire.com' in companies.news_source_list %}
+<!--        <a href=""><i class="fa fa-times" aria-hidden="true"></i></a>-->
+        <p>prnewswire.com</p>
+        {% endif %}
+        {% if 'yahoo.com' in companies.news_source_list %}
+<!--        <a href=""><i class="fa fa-times" aria-hidden="true"></i></a>-->
+        <p>yahoo.com</p>
+        {% endif %}
+
+    </div>
+            <a href="{% url 'portfolio-home' %}"><button class="btn btn-outline-light" type="button">Назад на главную</button></a>
+
+</div>
+{% endblock %}
+

@@ -1,0 +1,81 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}Добавление компании{% endblock %}
+
+{% block content %}
+<div class="features">
+    <script>
+        function ch(checkboxId, inputId, inputId2, value2) {
+          cb = document.getElementById(checkboxId);
+
+          if (cb.checked === true){
+            input = document.getElementById(inputId);
+            input.value = cb.value;
+            input2 = document.getElementById(inputId2);
+            input2.value = value2;
+          }
+
+        }
+    </script>
+
+    <h1>Новая компания</h1><br/><br/>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <input id="user_name" readonly="readonly" name="user_name" value="{{ user.username }}" hidden="hidden">
+        <input id="company_name" readonly="readonly" name="company_name" value="" hidden="hidden">
+        <div class="error-label">
+            {{ error }}
+        </div> <br/><br/>
+        {{ form.company_ticker }}
+        {{ form.time_laps_list }}
+
+
+        <label class="name-for-change">Выберите компанию: </label></br></br>
+        <div class="block-for-change">
+            {% for el in companies %}
+                <input id="{{ el.ticker }}" onchange="ch('{{ el.ticker }}', 'input1', 'company_name', '{{ el.company_name }}')" type="radio" name="comp" value="{{ el.ticker }}">
+                <label for="{{ el.ticker }}">{{ el.ticker }} ({{ el.company_name}})</label></br>
+            {% endfor %}
+        </div></br></br>
+
+
+<!--         <label class="name-for-change">Выберите методы прогнозирования: </label></br></br>-->
+<!--        <div class="block-for-change1">-->
+<!--            {% for el in methods %}-->
+<!--                <input id="{{ el.method_name }}" onchange="ch('{{ el.method_name }}', 'input2')" type="checkbox" name="meth" value="{{ el.method_name }}">-->
+<!--                <label for="{{ el.method_name }}">{{ el.method_name }}</label></br>-->
+<!--            {% endfor %}-->
+<!--        </div></br></br>-->
+
+
+<!--         <label class="name-for-change">Выберите новостные ресурсы: </label></br></br>-->
+<!--        <div class="block-for-change1">-->
+<!--            {% for el in sources %}-->
+<!--                <input id="{{ el.source }}" onchange="ch('{{ el.source }}', 'input4')" type="checkbox" name="sour" value="{{ el.source }}">-->
+<!--                <label for="{{ el.source }}">{{ el.source }}</label></br>-->
+<!--            {% endfor %}-->
+<!--        </div></br></br>-->
+
+
+        <label class="name-for-change">Выберите временные промежутки: </label></br></br>
+        <div class="block-for-change1">
+            {% for el in times %}
+                {% if el.time_value == '1H' %}
+                    <input id="1H" type="checkbox" name="tim" value="1H" checked>
+                    <label for="1H">1H</label></br>
+                {% else %}
+                    <input id="{{ el.time_value }}" type="checkbox" name="tim" value="{{ el.time_value }}" disabled="true">
+                    <label for="{{ el.time_value }}">{{ el.time_value }}</label></br>
+                {% endif %}
+            {% endfor %}
+        </div></br></br>
+
+        <button class="btn btn-outline-light" type="submit">Добавить компанию</button>
+
+    </form>
+
+</div>
+{% endblock %}
+
